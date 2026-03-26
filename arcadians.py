@@ -178,6 +178,7 @@ class Arcade_card(Card):
         #changes status back to "Exists", unblocking users card
         self.status="Exists"
         print(f"Good news, {self.arcade_login} your card has been unblocked")
+        
 
     
 
