@@ -66,3 +66,21 @@ def calculate_stats(doubloons_list):
         "min": minimum,
         "count": count
     }  
+def get_median(doubloons_list):
+    #cal median
+    if not doubloons_list:
+        return 0
+    return statistics.median(doubloons_list)
+def get_mode(doubloons_list):
+    #cal mode
+    if not doubloons_list:
+        return 0
+    try:
+        return statistics.mode(doubloons_list)
+    except statistics.StatisticsError:
+        return "No unique mode"
+def get_stdev(doubloons_list):
+    #cal standard deviations
+    if len(doubloons_list) < 2:
+        return 0
+    return statistics.stdev(doubloons_list)
