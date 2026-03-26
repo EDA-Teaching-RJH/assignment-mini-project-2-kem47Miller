@@ -74,6 +74,7 @@ def export_to_txt(filename, pirates):
         with open(filename, "w") as file:
             file.write("ARCADE CARD REPORT\n")
             file.write("-------------------------\n")
+            file.write("\n")#just for spacing
             
             for p in pirates:
                 file.write(f"Player: {p.privateer}\n")
@@ -81,6 +82,7 @@ def export_to_txt(filename, pirates):
                 file.write(f"Balance: {p.doubloons} doubloons\n")
                 file.write(f"Status: {p.status}\n")
                 file.write("-----------------------------------\n")
+                file.write("\n")#add extra line for spacing
         
         print(f"Report saved to {filename}")
         return True
