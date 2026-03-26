@@ -1,4 +1,5 @@
 import re
+import statistics
 
 def checking_arcade_login(arcade_login):
     #pattern should be PIRT then 5 numbers for Id format
@@ -38,3 +39,30 @@ def validate_amount(amount):
     except ValueError:
         print("Please enter a valid number")
         return False, 0
+def calculate_stats(doubloons_list):
+   
+    # Handle empty list
+    if not doubloons_list:
+        return {
+            "total": 0,
+            "average": 0,
+            "max": 0,
+            "min": 0,
+            "count": 0
+        }
+    
+    # Calculate stats
+    total = sum(doubloons_list)
+    count = len(doubloons_list)
+    average = total / count
+    maximum = max(doubloons_list)
+    minimum = min(doubloons_list)
+    
+    # Return as dictionary
+    return {
+        "total": total,
+        "average": average,
+        "max": maximum,
+        "min": minimum,
+        "count": count
+    }  
