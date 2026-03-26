@@ -50,3 +50,21 @@ def load_accounts(filename):
         print("Error loading file")
     
     return pirates
+
+def save_accounts(filename, pirates):
+   
+    try:
+        # Open file for writing
+        with open(filename, "w") as file:
+            # Write each card as a CSV line
+            for p in pirates:
+                # Format: privateer,arcade_login,doubloons,status
+                line = f"{p.privateer},{p.arcade_login},{p.doubloons},{p.status}\n"
+                file.write(line)
+        
+        print(f"Saved {len(pirates)} accounts to {filename}")
+        return True
+        
+    except Exception:
+        print("Error saving file")
+        return False
