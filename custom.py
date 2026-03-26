@@ -23,3 +23,18 @@ def validate_name(name):
         return False
 
 
+def validate_amount(amount):
+    
+    try:
+        # Try to convert to integer
+        amount_value = int(amount)
+        
+        # Check if positive
+        if amount_value > 0:
+            return True, amount_value
+        else:
+            print("Amount must be positive")
+            return False, 0
+    except ValueError:
+        print("Please enter a valid number")
+        return False, 0
