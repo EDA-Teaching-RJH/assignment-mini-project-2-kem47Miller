@@ -68,3 +68,23 @@ def save_accounts(filename, pirates):
     except Exception:
         print("Error saving file")
         return False
+def export_to_txt(filename, pirates):
+    
+    try:
+        with open(filename, "w") as file:
+            file.write("ARCADE CARD REPORT\n")
+            file.write("-------------------------\n")
+            
+            for p in pirates:
+                file.write(f"Player: {p.privateer}\n")
+                file.write(f"Card ID: {p.arcade_login}\n")
+                file.write(f"Balance: {p.doubloons} doubloons\n")
+                file.write(f"Status: {p.status}\n")
+                file.write("-----------------------------------\n")
+        
+        print(f"Report saved to {filename}")
+        return True
+        
+    except Exception:
+        print("Error saving report")
+        return False
