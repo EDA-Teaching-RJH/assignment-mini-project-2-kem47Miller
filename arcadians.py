@@ -2,8 +2,8 @@
 class Card:
     #Parent class other card types will inherit from/it is the base class
     def __init__(self, arcade_login, status="Exists"):
-        self.arcade_login=arcade_login
-        self.status=status
+        self._arcade_login=arcade_login
+        self._status=status
 class Arcade_card(Card):
     #inherits from Card class
     total_cards_created=0
@@ -39,7 +39,7 @@ class Arcade_card(Card):
         #getter for card ID
         return self.arcade_login
     @arcade_login.setter
-    def acrade_login(self, value):
+    def arcade_login(self, value):
         #setter for card id
         self._arcade_login= value
     @property
@@ -60,7 +60,7 @@ class Arcade_card(Card):
     @status.setter
     def status(self, value):
         #setter to check if stauts is valid
-        if value in ["Exist", "Blocked"]:
+        if value in ["Exists", "Blocked"]:
             self._status= value
         else:
             print("Invalid status")
