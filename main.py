@@ -122,7 +122,7 @@ def play_game():
                 print("An error has occurred. Please enter a valid number")
             return
     
-    print("Card not found")
+    print("Can not find card")
 
 def block_card():
     #Block a card
@@ -140,7 +140,7 @@ def block_card():
                 p.block()
             return
     
-    print("Card not found")
+    print("Oops, card not found")
 
 
 def unblock_card():
@@ -159,13 +159,13 @@ def unblock_card():
                 p.unblock()
             return
     
-    print("Card not found")
+    print("Sorry, but card not found")
 
 def show_system_statistics():
-    """Display comprehensive system statistics"""
-    print("\n" + "=" * 50)
+    #Display comprehensive system statistics
+    print("--------------\n")
     print("SYSTEM STATISTICS")
-    print("=" * 50)
+    print("~~~~~~~~")
     
     if len(pirates) == 0:
         print("No cards in system")
@@ -239,3 +239,16 @@ def show_system_statistics():
                 break
     
     print("-----------------\n")
+
+def export_report():
+    #Export report to text file
+    print("-------------------\n" )
+    print("EXPORT REPORT")
+    print("---------~~~~~~---")
+    
+    if len(pirates) == 0:
+        print("It seems there are no cards to export")
+        return
+    
+    if export_to_txt(EXPORT_FILENAME, pirates):
+        print(f"Report saved as: {EXPORT_FILENAME}")
