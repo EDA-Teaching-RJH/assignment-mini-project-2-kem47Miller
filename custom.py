@@ -26,19 +26,28 @@ def validate_name(name):
 
 def validate_amount(amount):
     
+    #Check if amount is valid
+    #Returns: True if valid, False if invalid
+    
     try:
-        # Try to convert to integer
         amount_value = int(amount)
-        
-        # Check if positive
         if amount_value > 0:
-            return True, amount_value
+            return True
         else:
             print("Amount must be positive")
-            return False, 0
+            return False
     except ValueError:
         print("Please enter a valid number")
-        return False, 0
+        return False
+
+
+def get_amount_value(amount):
+
+   # Get the integer value of the amount, assumes validation has already been done and assumes amount is already validated
+    
+    return int(amount)
+    
+   
 def calculate_stats(doubloons_list):
    
     # Handle empty list

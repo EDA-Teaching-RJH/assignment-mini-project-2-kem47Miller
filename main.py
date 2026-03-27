@@ -68,13 +68,34 @@ def view_card_details():
     #View detailed statistics for a specific card
     print("----~~~~~~--------\n")
     print("CARD DETAILED STATISTICS")
-    print("--------~~~~~~----\n")
+    print("--------~~~~~~-")
           
     card_id = input("Enter card ID: ").strip().upper()
     
     for p in pirates:
         if p.arcade_login == card_id:
             p.view_detailed_stats()  # Show detailed stats for this card
+            return
+    
+    print("Card not found")
+
+def add_credits():
+    #Add credits to a card
+    print("-------------------\n")
+    print("ADD CREDITS")
+    print("---------------")
+    
+    card_id = input("Enter card ID: ").strip().upper()
+    
+    for p in pirates:
+        if p.arcade_login == card_id:
+            print(f"Current balance: {p.doubloons} doubloons")
+            amount_str = input("Enter doubloons to add: ")
+            
+           # First check if valid
+            if is_valid_amount(amount_str):
+                amount = get_amount_value(amount_str)
+                p.top_up(amount)
             return
     
     print("Card not found")
