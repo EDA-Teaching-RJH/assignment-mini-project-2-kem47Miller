@@ -1,6 +1,6 @@
 # Import all the functions and classes from other files
 from arcadians import Arcade_card
-from custom import checking_arcade_login, validate_amount, validate_name, calculate_stats
+from custom import checking_arcade_login, validate_amount, get_amount_value, validate_name, calculate_stats
 from custom import get_median, get_mode, get_stdev
 from file_manager import load_accounts, save_accounts, export_to_txt
 
@@ -93,7 +93,7 @@ def add_credits():
             amount_str = input("Enter doubloons to add: ")
             
            # First check if valid
-            if is_valid_amount(amount_str):
+            if validate_amount(amount_str):
                 amount = get_amount_value(amount_str)
                 p.top_up(amount)
             return
