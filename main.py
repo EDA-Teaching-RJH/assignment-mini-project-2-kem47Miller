@@ -264,3 +264,20 @@ def save_and_exit():
     print("Goodbye!")
     print("~~~~~~~~~~~")
     return True
+
+def show_menu():
+    #Display the main menu
+    print("-------------~~~~~~~~\n")
+    print("MAIN MENU")
+    print("----------------------")
+    print("1. Create New Card")
+    print("2. View All Cards")
+    print("3. View Card Detailed Stats")
+    print("4. Add Credits to Card")
+    print("5. Play Game")
+    print("6. Block Card")
+    print("7. Unblock Card")
+    print("8. Show System Statistics")
+    print("9. Export Report to Text File")
+    print("10. Save and Exit")
+    print("-------------------------------")
