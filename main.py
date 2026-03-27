@@ -4,11 +4,11 @@ from custom import checking_arcade_login, validate_amount, get_amount_value, val
 from custom import get_median, get_mode, get_stdev
 from file_manager import load_accounts, save_accounts, export_to_txt
 
-# Constants - fixed values used throughout the program
+# fixed values in the code
 FILENAME = "pirate.csv"                      # CSV file for saving data
 EXPORT_FILENAME = "arcade_report.txt"        # Text file for reports
 
-# Load existing accounts when program starts
+# Checking existing accounts at the start of the code
 print("---------------------------")
 print("ARCADE CARD SYSTEM")
 print("-----------------------")
@@ -27,18 +27,18 @@ def create_card():
         print("Error: Player name cannot be empty")
         return
     
-    # Name is validated using regex from custom.py
+    # Name is validated using regex (from custom.py)
     if not validate_name(name):
         return
     
     # Get card ID
     card_id = input("Enter card ID (format: PIRT00001): ").strip().upper()
     
-    # validate card id format using regex from custom.py
+    # validate card id format using regex (from custom.py)
     if not checking_arcade_login(card_id):
         return
     
-    # Check if card ID already exists already
+    # Checking if card ID already exists already
     for p in pirates:
         if p.arcade_login == card_id:
             print(f"Error: Card ID {card_id} already exists!")
@@ -115,11 +115,11 @@ def play_game():
                 price_input = input("Enter game price: ")
                 price = int(price_input)
                 if price <= 0:
-                    print("An error has occurred. The price must be positive")
+                    print("An error has o-argh-ed(occured!. The price must be positive")
                     return
                 p.pricing(price)
             except ValueError:
-                print("An error has occurred. Please enter a valid number")
+                print("An error has o-argh-ed(occured!. Please enter a valid number")
             return
     
     print("Can not find card")
@@ -261,7 +261,7 @@ def save_and_exit():
     
     save_accounts(FILENAME, pirates)
     print("~~~~~~~~~~~~~~")
-    print("Goodbye!")
+    print("Fair winds, matey!")
     print("~~~~~~~~~~~")
     return True
 
@@ -281,3 +281,38 @@ def show_menu():
     print("9. Export Report to Text File")
     print("10. Save and Exit")
     print("-------------------------------")
+
+def main():
+    #Main program loop
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-10): ").strip()
+        
+        if choice == "1":
+            create_card()
+        elif choice == "2":
+            view_cards()
+        elif choice == "3":
+            view_card_details()
+        elif choice == "4":
+            add_credits()
+        elif choice == "5":
+            play_game()
+        elif choice == "6":
+            block_card()
+        elif choice == "7":
+            unblock_card()
+        elif choice == "8":
+            show_system_statistics()
+        elif choice == "9":
+            export_report()
+        elif choice == "10":
+            if save_and_exit():
+                break
+        else:
+            print("Invalid option. Please choose 1-10")
+
+
+# Call to run the main program
+if __name__ == "__main__":
+    main()
