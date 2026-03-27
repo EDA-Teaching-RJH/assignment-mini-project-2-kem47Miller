@@ -12,8 +12,8 @@ class Arcade_card(Card):
     total_doubloons_spent=0
 
     def __init__(self, privateer, arcade_login, doubloons=0):
-        #this part called when new arcaed card made
-        super()._init_(arcade_login, "Exists")
+        #this part called when new arcade card made
+        super().__init__(arcade_login, "Exists")
         self.privateer=privateer
         self.doubloons=doubloons
 
@@ -132,7 +132,7 @@ class Arcade_card(Card):
     def top_up(self, balance):#adding more doubloons
         #checking for card
         if self.status !="Exists":
-            print("Sorry, we are unable to add credits at this time due to your card being blocked")
+            print("Sorry, we are unable to add credits at this time due to your card being blocked matey")
             return False
         
         #checking if amount is valid
@@ -151,7 +151,7 @@ class Arcade_card(Card):
     def pricing(self, price):#cal balance after player buy game
         #check if card blocked
         if self.status != "Exists":
-            print("Sorry, but your card appears to be blocked")#tells them they ac't play game
+            print("Sorry, but your card appears to be blocked")#tells them they can't play game
             return False
         
         #check if balance is enough
@@ -174,7 +174,11 @@ class Arcade_card(Card):
         self.status="Blocked"
         print(f"Sorry but the card for {self.arcade_login} has been blocked")
 
-   
+    def unblock(self):
+        #changes status back to "Exists", unblocking users card
+        self.status="Exists"
+        print(f"Good news, {self.arcade_login} your card has been unblocked")
+        
 
     
 
