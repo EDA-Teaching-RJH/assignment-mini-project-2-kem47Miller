@@ -37,7 +37,7 @@ class Arcade_card(Card):
     @property
     def arcade_login(self):
         #getter for card ID
-        return self.arcade_login
+        return self._arcade_login
     @arcade_login.setter
     def arcade_login(self, value):
         #setter for card id
