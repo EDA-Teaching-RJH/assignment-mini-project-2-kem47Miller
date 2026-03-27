@@ -252,3 +252,15 @@ def export_report():
     
     if export_to_txt(EXPORT_FILENAME, pirates):
         print(f"Report saved as: {EXPORT_FILENAME}")
+
+def save_and_exit():
+    #Save all cards and exit program
+    print("-------------------\n")
+    print("SAVING AND EXITING")
+    print("-----------------")
+    
+    save_accounts(FILENAME, pirates)
+    print("~~~~~~~~~~~~~~")
+    print("Goodbye!")
+    print("~~~~~~~~~~~")
+    return True
