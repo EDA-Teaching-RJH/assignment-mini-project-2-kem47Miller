@@ -49,3 +49,17 @@ def create_card():
     pirates.append(new_card)
     print(f"Success! Card created for {name}")
     print(f"Total cards in system: {len(pirates)}")
+
+def view_cards():
+    #Display all cards
+    print("************---------------\n")
+    print("VIEW ALL CARDS")
+    print("---------------************\n")
+    
+    if len(pirates) == 0:
+        print("No cards available in system")
+    else:
+        print(f"Showing {len(pirates)} cards:")
+        print()
+        for p in pirates:
+            p.view()  # Call the view method from Arcade_card class
