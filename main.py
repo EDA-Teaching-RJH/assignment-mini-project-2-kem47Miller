@@ -123,3 +123,40 @@ def play_game():
             return
     
     print("Card not found")
+
+def block_card():
+    #Block a card
+    print("----------------\n")
+    print("BLOCK CARD")
+    print("------~~~~~~")
+    
+    card_id = input("Enter card ID to block: ").strip().upper()
+    
+    for p in pirates:
+        if p.arcade_login == card_id:
+            if p.status == "Blocked":
+                print("Card is already blocked")
+            else:
+                p.block()
+            return
+    
+    print("Card not found")
+
+
+def unblock_card():
+    #Unblock a card
+    print("--------------------\n")
+    print("UNBLOCK CARD")
+    print("~~~~~~~~~~~~~~~~~~~~")
+    
+    card_id = input("Enter card ID to unblock: ").strip().upper()
+    
+    for p in pirates:
+        if p.arcade_login == card_id:
+            if p.status == "Exists":
+                print("Card is already active")
+            else:
+                p.unblock()
+            return
+    
+    print("Card not found")
