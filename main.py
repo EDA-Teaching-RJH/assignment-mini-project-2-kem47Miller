@@ -160,3 +160,82 @@ def unblock_card():
             return
     
     print("Card not found")
+
+def show_system_statistics():
+    """Display comprehensive system statistics"""
+    print("\n" + "=" * 50)
+    print("SYSTEM STATISTICS")
+    print("=" * 50)
+    
+    if len(pirates) == 0:
+        print("No cards in system")
+        return
+    
+    # Use the first card to access class-level statistics
+    sample_card = pirates[0]
+    
+    # Get system-wide stats
+    print("\n--- OVERALL SYSTEM STATISTICS ---")
+    print(f"Total Cards Created (All Time): {sample_card.total_cards_all_time}")
+    print(f"Total Doubloons Added (All Time): {sample_card.total_doubloons_all_time}")
+    print(f"Total Games Played (All Time): {sample_card.total_games_all_time}")
+    print(f"Total Doubloons Spent (All Time): {sample_card.total_spent_all_time}")
+    
+    # Current card status
+    active_cards = [p for p in pirates if p.status == "Exists"]
+    blocked_cards = [p for p in pirates if p.status != "Exists"]
+    
+    print("\n--- CURRENT CARD STATUS ---")
+    print(f"Active Cards: {len(active_cards)}")
+    print(f"Blocked Cards: {len(blocked_cards)}")
+    
+    # Balance statistics
+    balances = [p.doubloons for p in pirates]
+    balance_stats = calculate_stats(balances)
+    
+    print("\n--- CURRENT BALANCE STATISTICS ---")
+    print(f"Total Balance in System: {balance_stats['total']} doubloons")
+    print(f"Average Balance per Card: {balance_stats['average']:.2f} doubloons")
+    print(f"Highest Balance: {balance_stats['max']} doubloons")
+    print(f"Lowest Balance: {balance_stats['min']} doubloons")
+    
+    # Additional statistics using custom library
+    print(f"Median Balance: {get_median(balances):.2f} doubloons")
+    print(f"Mode Balance: {get_mode(balances)}")
+    if len(balances) >= 2:
+        print(f"Standard Deviation: {get_stdev(balances):.2f}")
+    
+    # Game statistics for current cards
+    total_games = sum([p.total_individual_games for p in pirates])
+    total_spent = sum([p.total_individual_spent for p in pirates])
+    
+    print("\n--- GAME STATISTICS ---")
+    print(f"Total Games Played: {total_games}")
+    print(f"Total Doubloons Spent: {total_spent}")
+    
+    if total_games > 0:
+        avg_spent = total_spent / total_games
+        print(f"Average Spent per Game: {avg_spent:.2f} doubloons")
+    
+    # Find richest player
+    if balances:
+        highest_balance = max(balances)
+        for p in pirates:
+            if p.doubloons == highest_balance:
+                print(f"\n--- RICHEST PLAYER ---")
+                print(f"Player: {p.privateer}")
+                print(f"Balance: {p.doubloons} doubloons")
+                break
+    
+    # Find most active player
+    if total_games > 0:
+        most_games = max([p.total_individual_games for p in pirates])
+        for p in pirates:
+            if p.total_individual_games == most_games and most_games > 0:
+                print(f"\n--- MOST ACTIVE PLAYER ---")
+                print(f"Player: {p.privateer}")
+                print(f"Games Played: {p.total_individual_games}")
+                print(f"Total Spent: {p.total_individual_spent} doubloons")
+                break
+    
+    print("-----------------\n")
