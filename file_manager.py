@@ -1,46 +1,33 @@
 
 #File Manager for the Arcade Card System that Handles reading from and writing to CSV files
 
+"""
+File Manager for Arcade Card System
+Handles reading from and writing to CSV files
+"""
+
+import csv
 from arcadians import Arcade_card
 
 def load_accounts(filename):
-   
-    pirates = []  # Empty list to store cards
+
+    #Read from CSV file - loads existing card data
+    
+    
+    pirates = []
     
     try:
-        # Open file for reading
         with open(filename, "r") as file:
-            # Read each line one by one
-            for line in file:
-                line = line.strip()  # Remove newline and extra spaces
+            reader = csv.DictReader(file)
+            for row in reader:
+                privateer = row["privateer"]
+                arcade_login = row["arcade_login"]
+                doubloons = int(row["doubloons"])
+                status = row["status"]
                 
-                # Skip empty lines
-                if not line:
-                    continue
-                
-                # Split CSV line by commas so it is easier to work with
-                parts = line.split(",")
-                
-                # Check we have exactly 4 fields
-                if len(parts) == 4:
-                    privateer = parts[0]      # Player name
-                    arcade_login = parts[1]   # Card ID
-                    
-                    # Convert balance to integer, helps prevent errors
-                    try:
-                        doubloons = int(parts[2])
-                    except ValueError:
-                        doubloons = 0   # Default to 0 if invalid
-                    
-                    status = parts[3] # Card status
-                    
-                    # Create card object
-                    card = Arcade_card(privateer, arcade_login, doubloons)
-                    
-                    # Set the status (since constructor defaults to "Exists")
-                    card.status = status
-                    
-                    pirates.append(card)
+                card = Arcade_card(privateer, arcade_login, doubloons)
+                card.status = status
+                pirates.append(card)
         
         print(f"Loaded {len(pirates)} accounts from {filename}")
         
@@ -51,16 +38,25 @@ def load_accounts(filename):
     
     return pirates
 
+
 def save_accounts(filename, pirates):
-   
+    
+    #Write to CSV file - saves all card data.Having csv.DictWriter makes for cleaner code
+    
     try:
-        # Open file for writing
-        with open(filename, "w") as file:
-            # Write each card as a CSV line
+        with open(filename, "w", newline="") as file:
+            fieldnames = ["privateer", "arcade_login", "doubloons", "status"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            
+            writer.writeheader()  # Writes the header row
+            
             for p in pirates:
-                # Format: privateer,arcade_login,doubloons,status
-                line = f"{p.privateer},{p.arcade_login},{p.doubloons},{p.status}\n"
-                file.write(line)
+                writer.writerow({
+                    "privateer": p.privateer,
+                    "arcade_login": p.arcade_login,
+                    "doubloons": p.doubloons,
+                    "status": p.status
+                })
         
         print(f"Saved {len(pirates)} accounts to {filename}")
         return True
@@ -68,13 +64,17 @@ def save_accounts(filename, pirates):
     except Exception:
         print("Error saving file")
         return False
+
+
 def export_to_txt(filename, pirates):
+    
+    #Write to TEXT file - creates readable report
     
     try:
         with open(filename, "w") as file:
             file.write("ARCADE CARD REPORT\n")
             file.write("-------------------------\n")
-            file.write("\n")#just for spacing
+            file.write("\n")
             
             for p in pirates:
                 file.write(f"Player: {p.privateer}\n")
@@ -82,7 +82,7 @@ def export_to_txt(filename, pirates):
                 file.write(f"Balance: {p.doubloons} doubloons\n")
                 file.write(f"Status: {p.status}\n")
                 file.write("-----------------------------------\n")
-                file.write("\n")#add extra line for spacing
+                file.write("\n")
         
         print(f"Report saved to {filename}")
         return True
@@ -90,3 +90,4 @@ def export_to_txt(filename, pirates):
     except Exception:
         print("Error saving report")
         return False
+
