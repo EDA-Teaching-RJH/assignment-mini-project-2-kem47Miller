@@ -99,3 +99,27 @@ def add_credits():
             return
     
     print("Card not found")
+
+def play_game():
+    #Playing a game will deduct credits from a card
+    print("----------~~~~~~~-----\n")
+    print("PLAY GAME")
+    print("-----------")
+    
+    card_id = input("Enter card ID: ").strip().upper()
+    
+    for p in pirates:
+        if p.arcade_login == card_id:
+            print(f"Current balance: {p.doubloons} doubloons")
+            try:
+                price_input = input("Enter game price: ")
+                price = int(price_input)
+                if price <= 0:
+                    print("An error has occurred. The price must be positive")
+                    return
+                p.pricing(price)
+            except ValueError:
+                print("An error has occurred. Please enter a valid number")
+            return
+    
+    print("Card not found")
