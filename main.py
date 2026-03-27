@@ -14,3 +14,38 @@ print("ARCADE CARD SYSTEM")
 print("-----------------------")
 pirates = load_accounts(FILENAME)  # Read from CSV file
 print(f"System ready. {len(pirates)} cards loaded.")
+
+def create_card():
+    #Create a new arcade card
+    print("-------------------------~~\n")
+    print("CREATE NEW CARD")
+    print("--------------------------~~~~\n")
+    
+    # Get player name
+    name = input("Enter player name: ").strip()
+    if not name:
+        print("Error: Player name cannot be empty")
+        return
+    
+    # Name is validated using regex from custom.py
+    if not validate_name(name):
+        return
+    
+    # Get card ID
+    card_id = input("Enter card ID (format: PIRT00001): ").strip().upper()
+    
+    # validate card id format using regex from custom.py
+    if not checking_arcade_login(card_id):
+        return
+    
+    # Check if card ID already exists already
+    for p in pirates:
+        if p.arcade_login == card_id:
+            print(f"Error: Card ID {card_id} already exists!")
+            return
+    
+    # Create new card 
+    new_card = Arcade_card(name, card_id)
+    pirates.append(new_card)
+    print(f"Success! Card created for {name}")
+    print(f"Total cards in system: {len(pirates)}")
