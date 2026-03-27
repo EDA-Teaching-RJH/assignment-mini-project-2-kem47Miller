@@ -63,3 +63,18 @@ def view_cards():
         print()
         for p in pirates:
             p.view()  # Call the view method from Arcade_card class
+
+def view_card_details():
+    #View detailed statistics for a specific card
+    print("----~~~~~~--------\n")
+    print("CARD DETAILED STATISTICS")
+    print("--------~~~~~~----\n")
+          
+    card_id = input("Enter card ID: ").strip().upper()
+    
+    for p in pirates:
+        if p.arcade_login == card_id:
+            p.view_detailed_stats()  # Show detailed stats for this card
+            return
+    
+    print("Card not found")
