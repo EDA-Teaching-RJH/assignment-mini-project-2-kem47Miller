@@ -151,7 +151,7 @@ class Arcade_card(Card):
     def pricing(self, price):#cal balance after player buy game
         #check if card blocked
         if self.status != "Exists":
-            print("Sorry, but your card appears to be blocked")#tells them they can't play game
+            print("Hey, your card appears to be blocked")#tells them they can't play game
             return False
         
         #check if balance is enough
